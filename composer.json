@@ -1,0 +1,27 @@
+{
+    "name": "owl/list-delete",
+    "description": "List delete behavior for OctoberCMS.",
+    "homepage": "http://github.com/october-widgets",
+    "keywords": ["octobercms", "owl"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Scott Bedard",
+            "email": "scottbedard90@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Owl\\Behaviors\\ListDelete\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "minimum-stability": "dev"
+}
