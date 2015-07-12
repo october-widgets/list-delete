@@ -35,19 +35,22 @@ class Behavior extends ControllerBehavior {
         $model = $this->config->modelClass;
 
         if (($checkedIds = post('checked')) && is_array($checkedIds) && count($checkedIds)) {
+            $error = false;
             foreach ($checkedIds as $id) {
                 if ($record = $model::find($id)) {
                     if (method_exists($this->controller, 'overrideListDelete')) {
                         $this->controller->overrideListDelete($record);
                     } else {
-                        $record->delete();
+                        if (!$record->delete()) {
+                            $error = true;
+                        }
                     }
                 }
             }
 
             if (method_exists($this->controller, 'afterListDelete')) {
-                $this->controller->afterListDelete();
-            } else {
+                $this->controller->afterListDelete($error);
+            } elseif (!$error) {
                 Flash::success(Lang::get('backend::lang.list.delete_selected_success'));
             }
         }
